@@ -12,7 +12,7 @@ node {
     }
 
     stage('Deploy to Production') {
-        docker.withServer('tcp://production:2376', 'production') {
+        docker.withServer('tcp://34.70.253.16:2376', 'production') {
             sh 'docker run -d dockerhp/sample-app'
         }
     }
