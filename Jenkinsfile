@@ -2,12 +2,12 @@ node {
     def app
     stage('Build Docker Image') {
         checkout scm
-        app = docker.build('dockerhp/sample-app:latest')
+        app = docker.build('akshayingle/linux_tweet_app:dockerHplatest')
     }
     
     stage('Publish to Docker Hub') {
         docker.withRegistry("https://index.docker.io/v1/", "dockerhub") {
-            app.push('latest')
+            app.push('dockerHplatest')
         }
     }
 
