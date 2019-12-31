@@ -13,7 +13,13 @@ node {
 
     stage('Deploy to Production') {
         docker.withServer('tcp://34.70.253.16:2376', 'production') {
-            sh 'docker run -d akshayingle/linux_tweet_app:dockerHplatest'&
+           /* sh 'docker run -d akshayingle/linux_tweet_app:dockerHplatest'&*/
+             docker.image('akshayingle/linux_tweet_app:dockerHplatest').withRun('-p 3306:3306') {
+            /* do things */
+                 sh 'make check'
+        }
+                
+                
         }
     }
 }
