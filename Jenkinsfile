@@ -3,7 +3,7 @@ node {
     def source
     stage('Build Docker Image') {
         source = checkout(scm)
-        app = docker.build("dockerhp/sample-app:${env.BUILD_ID}", "--label dockerhp.sample.commit=${source.GIT_COMMIT} .")
+        app = docker.build("akshayingle/linux_tweet_app:${env.BUILD_ID}", "--label dockerhp.sample.commit=${source.GIT_COMMIT} .")
     }
 
     stage('Publish to Docker Hub') {
@@ -13,8 +13,8 @@ node {
     }
 
     stage('Deploy to Production') {
-        docker.withServer('tcp://production:2376', 'production') {
-            sh "docker service update --image dockerhp/sample-app:${env.BUILD_ID} sample"
+        docker.withServer('tcp://testprod:2376', 'production') {
+            sh "docker service update --image akshayingle/linux_tweet_app:dockerHplatest:${env.BUILD_ID} sample"
         }
     }
 }
